@@ -1,5 +1,7 @@
 const express = require('express');
 const http = require('http');
+// const https = require('https');
+const fs = require('fs');
 const WebSocket = require('ws');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
@@ -11,8 +13,18 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, '/../frontend')));
 //app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 // Create HTTP server by passing the Express app
-const server = http.createServer(app);
+const server = http.createServer(
+{
+//   key: fs.readFileSync('path/to/private-key.pem'),
+//   cert: fs.readFileSync('path/to/certificate.pem')
+}, 
+app);
+
+
+
 
 // Integrate WebSocket with the HTTP server
 const wss = new WebSocket.Server({ server });
@@ -42,7 +54,7 @@ wss.on('connection', function connection(ws, req) {
 });
 
     // Send a welcome message on new connection
-    ws.send('Welcome to the chat!');
+    ws.send('Submit a username to join the chat');
 });
 
 // Default route can be removed if you are serving only static files
