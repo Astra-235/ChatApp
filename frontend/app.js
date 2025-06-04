@@ -1,4 +1,5 @@
-const ws = new WebSocket(`ws://${window.location.host}`);
+const ws = new WebSocket(`https://chatapp-ve90.onrender.com`);
+// const ws = new WebSocket(`ws://${window.location.host}`);
 const userName = document.getElementById('userName')
 const sendUserNameButton = document.getElementById('sendUserNameButton');
 const messages = document.getElementById('messages');
